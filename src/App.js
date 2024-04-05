@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Cities from "./pages/Cities";
 import Results from "./pages/Results";
+import Register from "./pages/Register"
 import Navbar from "./components/Navbar";
 import Search from "./pages/Search";
 
@@ -17,6 +18,8 @@ class App extends Component {
             <Routes>
               <Route path="/" element={<Search />} />
               <Route path="/results" element={<Results query={"testquery"} />}/>
+              <Route path="/register" element={<Register />} />
+
             </Routes>
 
           </div>
