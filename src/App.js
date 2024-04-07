@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
-import Table from './components/Table.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Cities from "./pages/Cities";
+import Results from "./pages/Results";
+import Register from "./pages/Register"
+import Login from "./pages/Login"
+import Navbar from "./components/Navbar";
+import Search from "./pages/Search";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      cities: []
-    }
-  }
-
-    componentDidMount() {
-    	fetch('http://localhost:8080/cities')
-    	.then(res => res.json())
-    	.then(json => json)
-    	.then(cities => this.setState({ 'cities': cities }))
-    }
-
   render() {
     return (
-      <div className="App">
-      <nav className="navbar navbar-light bg-light">
-                <a className="navbar-brand" href="./">
-                  <img src={logo} alt="logo" width="40" /> City List
-                </a>
-              </nav>
-        <Table cities={ this.state.cities }/>
-      </div>
-    );
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Search />} />
+              <Route path="/results" element={<Results query={"testquery"} />}/>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+
+          </div>
+        </Router>
+    )
   }
+
 }
 
 export default App;

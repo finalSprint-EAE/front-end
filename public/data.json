@@ -1,0 +1,10 @@
+{
+  "results": [
+    {"id": 1, "title": "Movie", "genres": "Action/Adventure", "director": "Directorman", "date": "exampledate"},
+    {"id": 2, "title": "Film", "genres": "Drama", "director": "Filmmaker", "date": "exampledate"},
+    {"id": 3, "title": "Quest", "genres": "Fantasy", "director": "Directorea", "date": "exampledate"},
+    {"id": 4, "title": "Mission", "genres": "Thriller", "director": "Agent Director", "date": "exampledate"},
+    {"id": 5, "title": "Based on a True Story", "genres": "Comedy", "director": "Real Director", "date": "exampledate"},
+    {"id": 6, "title": "Never Happened", "genres": "Documentary", "director": "Fake Director", "date": "exampledate"}
+  ]
+}
