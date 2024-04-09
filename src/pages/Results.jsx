@@ -8,15 +8,14 @@ function Results() {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        fetch("/data.json")
-            .then((response) => response.json())
-            .then ((data) => {
-                const filteredResults = data.results.filter((item) => {
-                    const itemValue = item[searchBy].toString().toLowerCase();
-                    return itemValue.includes(query.toLowerCase());
-                });
-                setResults(filteredResults);
-            });
+        if (query) {
+            fetch(`http://localhost:8080/api/movies/search?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    setResults(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
     }, [query]);
 
     return (
@@ -28,7 +27,7 @@ function Results() {
             <p>Results:</p>
             <ul className="results-container">
                 {results.map((result) => (
-                    <Result key={result.id} result={result}/>
+                    <Result key={result.movieid} result={result}/>
                 ))}
             </ul>
         </div>
