@@ -9,10 +9,27 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (username === 'admin' && password === 'password') {
-            navigate('/');
-        } else {
-            setError('Invalid username or password');
+
+        try {
+            const response = await fetch('http://localhost:8080/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                // Redirect to the home page upon successful login
+                navigate('/');
+            } else {
+                // Handle invalid credentials
+                setError('Invalid username or password');
+            }
+        } catch (error) {
+            // Handle network errors or other exceptions
+            console.error('Error logging in:', error);
+            setError('An unexpected error occurred');
         }
     };
 
