@@ -18,25 +18,28 @@ function Register() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you can perform form submission handling
-        // For demonstration, just setting a message
-        setMessage("Registration successful!");
 
-        // Reset form fields
-        setFormData({
-            username: "",
-            password: "",
-            email: "",
-            firstName: "",
-            lastName: ""
-        });
+        try {
+            const response = await fetch('http://localhost:8080/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            setMessage(data.message);
+        } catch (error) {
+            console.error('Error registering user:', error);
+            setMessage('Error registering user. Please try again later.');
+        }
     };
 
     return (
         <div className="container">
-            <h1 className="page-title">CineMart</h1>
+            <h1 className="page-title">Register</h1>
 
             {message && <p>{message}</p>}
 
@@ -59,3 +62,4 @@ function Register() {
 }
 
 export default Register;
+
