@@ -10,26 +10,28 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const formData = {
+            username: e.target.username.value,
+            password: e.target.password.value
+        };
+
         try {
-            const response = await fetch('http://localhost:8080/api/auth', {
+            const response = await fetch('http://localhost:8080/api/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify(formData)
             });
 
+            const data = await response.json();
             if (response.ok) {
-                // Redirect to the home page upon successful login
-                navigate('/');
+            console.log("Login successful:", data);
             } else {
-                // Handle invalid credentials
-                setError('Invalid username or password');
+                console.log("Login failed:", data);
             }
         } catch (error) {
-            // Handle network errors or other exceptions
-            console.error('Error logging in:', error);
-            setError('An unexpected error occurred');
+            console.error("Error logging in:", error);
         }
     };
 

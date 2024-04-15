@@ -8,15 +8,17 @@ function Results() {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        if (query) {
-            fetch(`http://localhost:8080/api/movies/search?query=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    setResults(data);
-                })
-                .catch(error => console.error('Error fetching data:', error));
-        }
-    }, [query]);
+        const url = new URL('http://localhost:8080/api/movies/search');
+        url.searchParams.append('query', encodeURIComponent(query));
+        url.searchParams.append('searchBy', searchBy);
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setResults(data);
+            })
+            .catch(error => console.error("error fetching data:", error));
+    }, [query, searchBy]);
 
     return (
         <div className="container">
